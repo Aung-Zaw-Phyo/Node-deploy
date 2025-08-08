@@ -7,10 +7,16 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    container:
+      image: node:20
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with:
+        node-version: 20
 
+    - run: npm ci
+    
     - name: Install dependencies
       run: npm install
 
@@ -22,6 +28,8 @@ jobs:
         key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
         script: |
           cd /var/www/Node-deploy
+          echo "Before git pull:"
           git pull origin main
+          echo "After git pull:"
           npm install
           pm2 restart index.js
