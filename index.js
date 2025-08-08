@@ -16,7 +16,7 @@ app.use(cors(corsOptions))
 app.use(express.json());
 
 app.get('/', async(req, res, next) => {
-    res.status(200).send({ message: 'Server is running on: PORT ' + PORT })
+    res.status(200).send({ message: 'Server is running.' })
 })
 
 
