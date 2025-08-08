@@ -27,6 +27,8 @@ jobs:
         username: ${{ secrets.LIGHTSAIL_USERNAME }}
         key: ${{ secrets.LIGHTSAIL_SSH_KEY }}
         script: |
+          git config --global --add safe.directory /var/www/Node-deploy
+          sudo chown -R $USER:$USER /var/www/Node-deploy
           cd /var/www/Node-deploy
           echo "Before git pull:"
           git pull origin main
